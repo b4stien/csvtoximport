@@ -1,0 +1,22 @@
+{
+  "name": "csvtoximport",
+  "version": "0.0.0",
+  "authors": [
+    "Bastien Gandouet <bastien@mozaiqu.es>"
+  ],
+  "moduleType": [
+    "es6"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "file-saver.js": "~1.20150507.2",
+    "papaparse": "~4.1.2"
+  }
+}
