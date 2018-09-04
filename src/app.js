@@ -1,10 +1,11 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Reflux from 'reflux';
 
 var moment = require('moment');
 
 import Papaparse from 'papaparse';
-import FileSaver from 'fileSaver';
+import { saveAs } from 'file-saver/FileSaver';
 
 import { seemValidContent, csvToInternal, internalToXimport } from './csvtoximport'
 
@@ -70,8 +71,8 @@ class DropZone extends React.Component {
   }
 
   componentDidMount() {
-    var domNode = React.findDOMNode(this),
-        dropZone = React.findDOMNode(this).querySelector('#drop-file'),
+    var domNode = ReactDOM.findDOMNode(this),
+        dropZone = ReactDOM.findDOMNode(this).querySelector('#drop-file'),
         fileInput = domNode.querySelector('#file-input');
 
 
@@ -123,7 +124,7 @@ class DropZone extends React.Component {
         </div>
 
         <div id='explanation'>
-          <p><span id='star'>*</span> : le fichier CSV doit respecter la structure de <a href="csv_template.csv">ce modèle</a>, ne contenir <span className="highlighted">aucun accent</span> (ni <span className="highlighted">caractères spéciaux</span>) ni ne contenir de données à la première ligne (vous pouvez donc laisser les titres de colonne du modèle).</p>
+          <p><span id='star'>*</span> : le fichier CSV doit respecter la structure de <a href={csvTemplate}>ce modèle</a>, ne contenir <span className="highlighted">aucun accent</span> (ni <span className="highlighted">caractères spéciaux</span>) ni ne contenir de données à la première ligne (vous pouvez donc laisser les titres de colonne du modèle).</p>
 
           <p>Le caractère de séparation sera détécté automatiquement, mais dans le doute vous pouvez utiliser une <span className="highlighted">virgule</span> (<span className="highlighted">,</span>).</p>
 
@@ -153,7 +154,7 @@ class ShowInternalZone extends React.Component {
 
   handleDownload(e) {
     var blob = new Blob([internalToXimport(this.props.internal)], {type: 'text/plain;charset=ascii'});
-    FileSaver.saveAs(blob, 'ximport_' + moment().format('YYYYMMDDHHmm') + '.txt');
+    saveAs(blob, 'ximport_' + moment().format('YYYYMMDDHHmm') + '.txt');
   }
 
   render() {

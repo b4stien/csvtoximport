@@ -1,38 +1,24 @@
-var webpack = require('webpack');
+var path = require('path');
 
 module.exports = {
-  context: __dirname + '/app',
-  entry: {
-    javascript: './app',
-    html: './index.html',
-  },
-
-  output: {
-    filename: 'bundle.js',
-    path: __dirname + '/dist',
-  },
-
-  resolve: {
-    alias: {
-      papaparse: __dirname + '/bower_components/papaparse/papaparse.js',
-      fileSaver: __dirname + '/bower_components/file-saver.js/FileSaver.js',
-    },
-    // root: __dirname + '/web/static/js',
-  },
-
   module: {
-    loaders: [
+    rules: [
       {
-        test: /\.js?$/,
-        exclude: /(node_modules|bower_components)/,
-        loader: 'babel'
+        test: /\.js$/,
+        loader: 'buble-loader',
+        include: path.join(__dirname, 'src'),
+        options: {
+          objectAssign: 'Object.assign'
+        }
       },
       {
-        test: /\.html$|\.csv$/,
-        loader: 'file?name=[name].[ext]',
-      },
+        test: /\.(csv)$/,
+        use: [
+          {
+            loader: 'file-loader',
+          }
+        ]
+      }
     ]
-  },
-
-  devtool: 'source-map',
-}
+  }
+};

@@ -8,10 +8,15 @@ export function seemValidContent(contentLines) {
     return [false, 'Votre fichier ne semble pas contenir de données'];
   }
 
-  for(let line of contentLines.slice(1)) {
+  let booleanMarker = false;
+  contentLines.slice(1).map((line) => {
     if(line.length !== 12 && (line.length !== 1 && line[1] !== '')) {
-      return [false, 'La structure de votre fichier semble incorrecte'];
+      booleanMarker = true;
     }
+  });
+
+  if(booleanMarker) {
+    return [false, 'La structure de votre fichier semble incorrecte'];
   }
 
   return [true, ''];
@@ -76,6 +81,6 @@ var internalLineToXimportLine = function(internalLine) {
 export function internalToXimport(internalLines) {
   var ximportLines = internalLines.map(internalLineToXimportLine);
   ximportLines.push('');
-  
+
   return ximportLines.join('\r\n');
 }
