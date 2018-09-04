@@ -24,5 +24,6 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+yarn-error.log
 /node_modules/
 /dist/
